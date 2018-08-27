@@ -1,0 +1,13 @@
+{
+    "language": "C",
+    "supportedCompilers" : [
+        {
+            "compiler": "gcc",
+            "arguments": "-std=c99 -DMINIAPP -DUSESINGLES -DMERSENNE -O3 -lm -lgomp -I."
+        },
+        {
+            "compiler": "llvm",
+            "arguments": "-std=c99 -DMINIAPP -DUSESINGLES -DMERSENNE -O3 -lm -lgomp -I."
+        }
+    ]
+}
