@@ -1,0 +1,25 @@
+{        
+    "nodeDefinition" : {
+        "deviceTypes" : {
+            "ZCU102" : {
+                "type" : "board",
+                "vendor" : "Xilinx",
+                "partNumber" : "EK-U1-ZCU102-G"
+            }
+        },
+        "devices" : {
+            "ZCU102_instance" : {
+                "type" : "ZCU102",
+                "host" : true
+            }
+        },
+        "connectionTypes" : {},
+        "connections" : []
+    },
+    
+    "system" : {
+        "nodes" : ["ZCU102_node"],
+        "connectionTypes" : {},
+        "connections" : []
+    }
+}

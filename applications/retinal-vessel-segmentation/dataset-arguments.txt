@@ -1,0 +1,2 @@
+For profiling, use the following command line argument within CAOS:
+%%DATASET_DIR%%/input_orig.ppm
