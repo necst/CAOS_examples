@@ -1,0 +1,12 @@
+{
+    "@item@" : {
+        "resourceEstimation" : {
+            "@item@": {
+                "LUT": "@int@", 
+                "DSP48E": "@int@" , 
+                "FF": "@int@" , 
+                "BRAM_18K": "@int@" 
+            }
+        }
+    }
+}
