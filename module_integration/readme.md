@@ -1,9 +1,7 @@
 # Module Integration
 
 In this folder it is possible to find information and examples on how to integrate a custom module within the CAOS Framework.
-Folder
- m_2.2_hw_resource_estimation
-provides an example on how to modify the module that is specialized to estimate the resources of the functions that CAOS identifes as candidates for hardware acceleration.
+Folder **m_2.2_hw_resource_estimation** provides an example on how to modify the module that is specialized in estimating the resources of the functions that CAOS identifes as candidates for hardware acceleration.
 
 ## Module Integration Flow
 Here's the basic flow to implement a custom module and integrate it into the CAOS Framework.
@@ -15,7 +13,7 @@ The custom module has to be specified using Python.
 The flow of the application can be represented as follows:
 ![Application Flow](https://raw.githubusercontent.com/necst/CAOS_examples/master/module_integration/imgs/CAOS_modules_custom_sketch.jpg)
 
-The module receives a Json file containing data at different levels regardig the application that is being analyzed. As an example, we can analyze the template json input file for the module 2.2, regarding hardware resource estimation.
+The module receives a Json file containing data at different levels regardig the application that is being analyzed, and the source codes of the application. As an example, we can analyze the template json input file for the module 2.2, regarding hardware resource estimation.
 
 ```json
 {
@@ -155,7 +153,7 @@ The module receives a Json file containing data at different levels regardig the
 
 ```
 
-The input Json file provides multiple information regarding the definition of a node, as well as multiple information regarding the functions present into the source code.
+The input Json file provides multiple information regarding the definition of a node, as well as various data concerning the functions present into the source code.
 
 As the resource hardware estimation step's task is to estimate of much resources are taken by each function, a very interesting part of the file is represented by this part:
 
@@ -185,8 +183,8 @@ As the resource hardware estimation step's task is to estimate of much resources
 
 ```
 
-In the architecturalTemplate section in fact, we can find multiple information regarding the device supported and all the functions that have been previously identified by CAOS to be candidate for hardware acceleration. 
-Thanks to this information, our module can easily focus on estimating hardware resources for just the functions with the field "hardwareAcceleration" to true, and thanks to the information available in the previous part of the file we can easily understand where these functions are implemented in the source file, as well as the location of the files.
+In the **architecturalTemplate** section in fact, we can find multiple information regarding the device supported and all the functions that have been previously identified by CAOS to be candidate for hardware acceleration. 
+Thanks to these information, our module can easily focus on estimating hardware resources for just the functions with the field ** "hardwareAcceleration" ** to true, and thanks to the information available in the previous part of the file we can easily understand where these functions are implemented in the source file, as well as the location of the files.
 
 The output of the custom module, has to be compliant with the interfaces available within CAOS. An example output json file for this step is the following:
 
@@ -216,8 +214,8 @@ In this output file, it is observable as for each deviceType indicated in the in
 
 ### 2. Module Implementation
 
-Use the template file to start implementing your own module. The file begins with the inclusion of all the library necessary to CAOS to call the custom module.
-The implement the custom module, it is necessary to modify the module.py file. In particular, inside this module it is necessary to implement the runModule function:
+Use the template file to start implementing your own module. The file begins with the inclusion of all the libraries necessary to CAOS to call the custom module.
+The implement the custom module, it is necessary to modify the module.py file. In particular, inside this module it is necessary to implement the **runModule** function:
 
 ```python
 def runModule(jsonPayload, workDir, blobNames, outLogPath, outBlobDir):
@@ -241,14 +239,14 @@ def runModule(jsonPayload, workDir, blobNames, outLogPath, outBlobDir):
 
     return responseData
 ```
-Where responseData needs to be compliant with the Json file described in the previous section.
+Where **responseData** needs to be compliant with the Json file described in the previous section.
  
 
 ### 3. Test the new Module
 
 ### 4. Run your module on a public server
 
-To allow CAOS to use the custom module, it is necessary to deploy it on a public server and retrieve the IP Address and the port number.
+To allow CAOS to use the custom module, it is necessary to deploy it on a public server and retrieve the **IP Address** and the ***port number***.
 To deploy the application on your own server it is just necessary to execute:
 
 ```python
