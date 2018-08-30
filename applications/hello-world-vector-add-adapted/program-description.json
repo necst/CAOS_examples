@@ -2,7 +2,7 @@
     "language": "C++",
     "supportedCompilers" : [
         {
-            "compiler": "gcc",
+            "compiler": "g++",
             "arguments": ""
         },
         {
