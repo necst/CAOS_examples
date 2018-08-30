@@ -123,7 +123,7 @@ def test(jsonPayload, module_path=None, handle_implementation=True,
         if test_callback:
             test_callback(json_response, blobs, resultFolder)
 
-        print("\n\nTEST PASSED!\n")
+        print("\n\nOUTPUT VALIDATION PASSED!\n")
 
     except:
         if handle_implementation and mod:
