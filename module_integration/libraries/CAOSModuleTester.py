@@ -7,6 +7,7 @@ You can easily install the dependencies via pip.
 """
 
 import os
+import sys
 import optparse
 import requests
 import json
@@ -50,6 +51,7 @@ def test(jsonPayload, module_path=None, handle_implementation=True,
         - blobNames: the list of blob names downloaded as of the response
         - blobDir: the path where the blobs have been downloaded
     """
+    mod = None
     try:
         if handle_implementation:
             # launch module
@@ -81,7 +83,11 @@ def test(jsonPayload, module_path=None, handle_implementation=True,
             time.sleep(1)
 
         if not state == "COMPLETED":
-            raise Exception("Task not completed succesfully. State: " + state)
+            stackTrace = ""
+            if 'stackTrace' in jsonResponse:
+                stackTrace = ". \nModule stackTrace:\n\n" + jsonResponse['stackTrace']
+
+            raise Exception("Task not completed succesfully. State: " + state + stackTrace)
 
         # download resulting blobs if needed
         if resultFolder is not None:
@@ -103,18 +109,24 @@ def test(jsonPayload, module_path=None, handle_implementation=True,
         blobs = jsonResponse["blobs"]
         json_response = jsonResponse['response']
         # check json
-        jsonValidator_path = os.path.join(module_path, "test/response.json")
+        jsonValidator_path = os.path.join(module_path, "test_resources/response.json")
         jsonValidator = {}
         with open(jsonValidator_path) as json_file:
             jsonValidator = json.load(json_file)
         assert CAOSjsonTester.validate_json(json_response, jsonValidator), \
-            "Failed response json validation."
+            "Failed json response validation. Module output is:\n\n" + \
+            json.dumps(json_response, sort_keys=True, indent=4) + \
+            "\n\nExpected output format is:\n\n" + \
+            json.dumps(jsonValidator, sort_keys=True, indent=4)
+
         # test_callback
         if test_callback:
             test_callback(json_response, blobs, resultFolder)
 
+        print("\n\nTEST PASSED!\n")
+
     except:
-        if handle_implementation:
+        if handle_implementation and mod:
             # terminate module
             mod.terminate()
         raise
@@ -206,5 +218,10 @@ def _doPost(url, files={}, printResponse = True):
 
 def _start_module(implementation_path, hostname="localhost", port=5000,
                   work_dir=None):
-    cmd = ["python3", implementation_path, "-H", hostname, "-P", str(port)]
+
+    pythonCmd = "python"
+    if sys.version_info[0] >= 3:
+        pythonCmd = "python3"
+
+    cmd = [pythonCmd, implementation_path, "-H", hostname, "-P", str(port)]
     return subprocess.Popen(cmd, cwd=work_dir)

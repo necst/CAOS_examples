@@ -4,8 +4,9 @@
             "@item@": {
                 "LUT": "@int@", 
                 "DSP48E": "@int@" , 
-                "FF": "@int@" , 
-                "BRAM_18K": "@int@" 
+                "FF": "@int@", 
+                "BRAM_18K": "@int@",
+                "URAM": "@int@"
             }
         }
     }

@@ -24,11 +24,11 @@ import tarfile
 import re
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) +
-                "/../libraries")
+                "/../../libraries")
 import CAOSFlaskModule
 
 codeArchive_PATH = "codeArchive"
-__supported_templates__ = ['sst', 'masterslave']
+__supported_templates__ = ['masterslave']
 
 def runModule(jsonPayload, workDir, blobNames, outLogPath, outBlobDir):
     """Parameters
@@ -117,14 +117,15 @@ def runModule(jsonPayload, workDir, blobNames, outLogPath, outBlobDir):
         return responseData
 
 #------------------------------------------------------------------------------------------------------------------[Hardware Estimation]---
+
 def computeResourceEstimation(functionIR, deviceInfo, srcPath):
     # path to the source file containing the function for which hardware estimation is required
     filename = srcPath + "/" + functionIR["filePath"]
     
     # TODO: Implement here the functions to estimate resources of a specific function.
-    estimation = { "LUT": 100, "FF": 100, "DSP48E": 100, "BRAM_18K" : 100 }
+    estimation = { "LUT": 100, "FF": 100, "DSP48E": 100, "BRAM_18K" : 100, "URAM" : 0 }
     
-    return estimate
+    return estimation
 
 def log(text, logFile):
     # print needed only for debugging purposes

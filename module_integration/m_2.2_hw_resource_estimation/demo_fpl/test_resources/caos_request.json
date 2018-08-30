@@ -1,0 +1,141 @@
+{
+    "architecture": {
+        "nodeDefinition": {
+            "connectionTypes": {
+                "pcie_gen3": {
+                    "standard": "PCIe",
+                    "duplex": "full",
+                    "version": "3.0",
+                    "bandwidth": "15.75 GB/s"
+                }
+            },
+            "devices": {
+                "cpu": {
+                    "host": true,
+                    "type": "intel-vcore"
+                },
+                "f1-fpga-instance": {
+                    "type": "f1-fpga"
+                }
+            },
+            "deviceTypes": {
+                "f1-fpga": {
+                    "vendor": "Xilinx",
+                    "partNumber": "XCVU9P-FLGB2104-2-I",
+                    "type": "board"
+                },
+                "intel-vcore": {
+                    "vendor": "intel",
+                    "partNumber": "-",
+                    "type": "cpu"
+                }
+            },
+            "connections": [
+                {
+                    "source": "f1-fpga_instance",
+                    "target": "cpu",
+                    "type": "pcie_gen3"
+                }
+            ]
+        },
+        "system": {
+            "connections": [],
+            "connectionTypes": [],
+            "nodes": [
+                "f1-fpga_node"
+            ]
+        }
+    },
+
+
+    "language": "c++",
+    "supportedCompilers": [
+        {
+            "compiler": "g++",
+            "arguments": ""
+        },
+        {
+            "compiler": "llvm",
+            "arguments": ""
+        }
+    ],
+    "codeArchive": "code.tar.gz",
+
+
+    "functions": {
+        "vector_add(int*, int*, int*)": {
+            "clangFilename": "1.ll",
+            "returnType": "void",
+            "name": "vector_add",
+            "parameters": [
+                {
+                    "name": "c[81920]",
+                    "type": "int"
+                },
+                {
+                    "name": "a[81920]",
+                    "type": "int"
+                },
+                {
+                    "name": "b[81920]",
+                    "type": "int"
+                }
+            ],
+            "clangName": "_Z10vector_addPiS_S_",
+            "startLine": 84,
+            "endLine": 90,
+            "language": "c++",
+            "filePath": "code/vector_add.cpp"
+        },
+        "main": {
+            "clangFilename": "1.ll",
+            "returnType": "int",
+            "name": "main",
+            "parameters": [
+                {
+                    "name": "argc",
+                    "type": "int"
+                },
+                {
+                    "name": "argv[]",
+                    "type": "char *"
+                }
+            ],
+            "clangName": "main",
+            "startLine": 51,
+            "endLine": 82,
+            "language": "c++",
+            "filePath": "code/vector_add.cpp"
+        }
+    },
+    "callgraph": {
+        "vector_add(int*, int*, int*)": [],
+        "main": [
+            "malloc",
+            "printf",
+            "vector_add(int*, int*, int*)"
+        ]
+    },
+
+
+    "architecturalTemplate": {
+        "targetConfiguration": {
+            "devices": [
+                "f1-fpga-instance"
+            ]
+        },
+        "supportedDevices": [
+            "f1-fpga-instance"
+        ],
+        "id": "MasterSalve",
+        "functions": {
+            "vector_add(int*, int*, int*)": {
+                "hardwareAcceleration": true
+            },
+            "main": {
+                "hardwareAcceleration": false
+            }
+        },
+        "type": "MasterSlave"
+    }
+}
