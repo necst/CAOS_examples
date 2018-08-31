@@ -1,7 +1,9 @@
-# CAOS_example_applications
-This repository hosts a set of example applications that can be accelerated on FPGA-based system via the [CAOS Framework](http://caos.necst.it/)
+# CAOS\_example\_applications
+This repository hosts a set of example applications that can be accelerated on FPGA-based system via the [CAOS Framework](http://caos.necst.it/).
 
 Furthermore, in the **module_integration** folder, it is possible to find the instructions and templates to create a custom code for the CAOS Framework.
+
+Introductory slides on CAOS are also available [here](https://github.com/necst/CAOS_examples/CAOS-intro.pdf).
 
 ## Contributions
 
